@@ -1,4 +1,8 @@
-# checkSSL
+```
+┌─┐┬ ┬┌─┐┌─┐┬┌─╔═╗╔═╗╦  
+│  ├─┤├┤ │  ├┴┐╚═╗╚═╗║  
+└─┘┴ ┴└─┘└─┘┴ ┴╚═╝╚═╝╩═╝
+```
 
 **Secure Sockets Layer** (SSL) certificates are a cornerstone of online security, ensuring that data exchanged between a user's browser and a website is encrypted and secure. These digital certificates authenticate the identity of a website, instilling trust in users by confirming that they are interacting with a legitimate entity. By enabling HTTPS (Hypertext Transfer Protocol Secure), SSL certificates safeguard sensitive information, such as login credentials, financial transactions, and personal data, from being intercepted by malicious actors. In today’s digital landscape, where cybersecurity threats are increasingly sophisticated, SSL certificates are essential for maintaining privacy, fostering trust, and ensuring regulatory compliance for businesses and individuals alike.
 
@@ -24,3 +28,113 @@ Maintaining their validity and security is critical:
 - Automate renewal processes where possible.
 - Use strong cryptographic algorithms.
 - Revoke and replace compromised certificates immediately.
+
+# The Script
+
+## Features
+
+- **Domain Validation**: Validates domain existence before checking SSL certificates.
+- **Expiration Checks**: Reports the number of days remaining until expiration.
+- **Thresholds**: Configurable warning and critical thresholds for expiration alerts.
+- **Email Notifications**: Sends email alerts for domains with certificates nearing expiration.
+- **Concurrency**: Uses multithreading for faster processing.
+- **Logging**: Logs all errors to a file and prints domain-specific errors in a human-readable format in the terminal.
+
+## Requirements
+
+- Python 3.8 or higher
+
+Required Python libraries:
+
+- ssl
+- socket
+- yaml
+- smtplib
+- email
+- termcolor
+- tabulate
+- concurrent.futures
+
+Install dependencies using pip:
+
+```
+pip install termcolor tabulate pyyaml
+```
+
+## Setup
+
+### Configuration File
+
+Create a config.yaml file in the script directory with the following structure:
+
+```
+warning_threshold: 30    # Days before expiration to trigger a warning
+critical_threshold: 10   # Days before expiration to trigger a critical alert
+smtp:
+  smtp_server: "smtp.example.com"
+  smtp_port: 587
+  use_tls: true
+  sender_email: "your_email@example.com"
+  recipient_email: "recipient_email@example.com"
+  username: "your_username"
+  password: "your_password"
+domain_file: "domains.txt"  # Path to the file containing the list of domains
+```
+
+### Domains File
+
+Create a `domains.txt` file listing the domains to check, one per line:
+
+```
+example.com
+example.org
+example.net
+```
+
+## Usage
+
+Run the script using Python:
+
+```
+python ssl_cert_checker.py
+```
+
+### Terminal Output
+
+The script displays a table of results:
+
+```
+Domain             Expiry Date    Days Remaining    Status
+example.com        2024-01-31     15                WARNING
+example.org        2024-05-15     120               OK
+example.net        2024-01-20     5                 CRITICAL
+```
+
+If errors occur, they are displayed after the results in a human-readable format:
+
+```
+Domain/Certificate Errors:
+Domain validation failed: invalid-domain.com
+Failed to check certificate for expired-domain.com: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:1123)
+```
+
+### Logs
+
+All errors are logged in `ssl_checker.log`.
+
+### Email Alerts
+
+If any domains have a "WARNING" or "CRITICAL" status, an email is sent to the configured recipient.
+
+## Notes
+
+- Ensure the SMTP credentials in the `config.yaml` file are correct for email functionality.
+- Adjust the `warning_threshold` and `critical_threshold` as needed.
+
+## Contributing
+
+If you'd like to contribute, please fork the repository and create a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License.
