@@ -1,0 +1,13 @@
+google.com
+microsoft.com
+apple.com
+amazon.com
+facebook.com
+mail.google.com
+developer.apple.com
+docs.microsoft.com
+expired.badssl.com
+self-signed.badssl.com
+untrusted-root.badssl.com
+nonexistentdomain12345.com
+fakewebsitefortesting.com
