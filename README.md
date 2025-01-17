@@ -55,17 +55,22 @@ Required Python libraries:
 - tabulate
 - concurrent.futures
 
-Install dependencies using pip:
+### Dependencies
 
+- Install dependencies manually:
 ```
-pip install termcolor tabulate pyyaml
+pip3 install termcolor tabulate pyyaml
+```
+- Install using requirments file:
+```
+pip3 install -r requirements.txt 
 ```
 
 ## Setup
 
 ### Configuration File
 
-Create a config.yaml file in the script directory with the following structure:
+Create a `config.yaml` file in the script directory with the following structure:
 
 ```
 warning_threshold: 30    # Days before expiration to trigger a warning
@@ -93,10 +98,15 @@ example.net
 
 ## Usage
 
-Run the script using Python:
+You can run the script two ways in your Terminal.
 
+- Using the python Command:
 ```
 python ssl_cert_checker.py
+```
+- Using the Script’s Filename Directly:
+```
+./ssl_cert_checker.py
 ```
 
 ### Terminal Output
