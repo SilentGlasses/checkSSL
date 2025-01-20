@@ -102,11 +102,11 @@ You can run the script two ways in your Terminal.
 
 - Using the python Command:
 ```
-python ssl_cert_checker.py
+python sslchecker.py
 ```
 - Using the Script’s Filename Directly:
 ```
-./ssl_cert_checker.py
+./sslchecker.py
 ```
 
 ### Terminal Output
